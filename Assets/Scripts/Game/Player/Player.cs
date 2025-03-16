@@ -19,8 +19,8 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         levelBar.SetLevel(0f);
-
-        
+        GameManager.instance.RestartGame();
+        Time.timeScale = 0;       
     }
 
     // Update is called once per frame

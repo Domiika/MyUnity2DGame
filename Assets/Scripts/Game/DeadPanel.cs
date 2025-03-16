@@ -8,8 +8,8 @@ public class DeadPanel : MonoBehaviour
 {
     [SerializeField] GameObject deadPanel; 
     [SerializeField] TextMeshProUGUI timeScore;
-    public int score;
- 
+    
+    
     public void OnPlayerDeath()
     {
         // Získá čas od spuštění levelu
@@ -17,7 +17,7 @@ public class DeadPanel : MonoBehaviour
 
         int minutes = Mathf.FloorToInt(elapsedTime / 60);
         int seconds = Mathf.FloorToInt(elapsedTime % 60);
-        timeScore.text = string.Format("Timer: {0:00}:{1:00}\nScore: {2}", minutes, seconds, score);
+        timeScore.text = string.Format("Timer: {0:00}:{1:00}\nScore: {2}", minutes, seconds, GameManager.instance.score);
     }
 
     public void Restart()

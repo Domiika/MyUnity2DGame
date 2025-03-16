@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     private bool isCollisionActive = false;
     public GameObject xpPrefab;  // Prefab XP, který spadne po smrti
     public int xpAmount = 10; 
+    public int score = 10;
     
 
 
@@ -39,6 +40,7 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         DropXP();
+        GameManager.instance.AddScore(10);
         Destroy(this.gameObject);
     }
 

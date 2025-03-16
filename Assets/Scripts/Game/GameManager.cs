@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    
+    public static GameManager instance;
     public GameObject pauseMenu;
-
+    public int score = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -21,5 +23,29 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
         }  
+    }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Zajistí, že GameManager zůstane mezi scénami
+        }
+        else
+        {
+            Destroy(gameObject); // Zničí duplicitní GameManager
+        }
+    }
+
+    public void RestartGame()
+    {
+        instance.score = 0;
+    }
+
+    public void AddScore(int amount)
+    {
+        score += amount;
+        Debug.Log("Score: " + score);
     }
 }
