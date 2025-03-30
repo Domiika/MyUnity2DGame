@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public int level = 1;
     public GameObject levelUpPanel;
     public GameObject deadPanel;
+    public AudioManager audioManager;
 
     void Start()
     {
@@ -67,7 +68,7 @@ private IEnumerator Wait()
         Time.timeScale = 0;
         deadPanel.SetActive(true);
         FindObjectOfType<DeadPanel>().OnPlayerDeath();
-
+        audioManager.Death();
     }
     public void LevelUp()
     {

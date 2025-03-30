@@ -28,10 +28,14 @@ public class LevelUpPanel : MonoBehaviour
     public TextMeshProUGUI textButton22;
     public GameObject unlockText1;
     public TextMeshProUGUI textButton3;
+    public GameObject description1;
+    public GameObject description2;
+    public GameObject description3;
 
     
     public void Button1()
     {
+        description1.SetActive(false);
         levelUpPanel.SetActive(false);
         Time.timeScale = 1;
 
@@ -67,6 +71,7 @@ public class LevelUpPanel : MonoBehaviour
 
     public void Button2()
     {
+        description2.SetActive(false);
         levelUpPanel.SetActive(false);
         Time.timeScale = 1;
 
@@ -85,6 +90,7 @@ public class LevelUpPanel : MonoBehaviour
         {
             spellShotManager.timeToSpawn *= 0.8f;
             spellShotManager.damage += 5f;
+            button2Level++;
             textButton21.text = "+5% speed";
             textButton22.text = "+5 damage";
             blastLevel++;
@@ -104,6 +110,7 @@ public class LevelUpPanel : MonoBehaviour
 
     public void Button3()
     {
+        description3.SetActive(false);
         levelUpPanel.SetActive(false);
         Time.timeScale = 1;
     }

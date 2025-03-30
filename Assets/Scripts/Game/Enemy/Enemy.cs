@@ -8,24 +8,25 @@ public class Enemy : MonoBehaviour
     public float damageInterval = 1f;
     public float damage = 1f;
     public float enemyHealth = 50f;
-    private bool isCollisionActive = false;
-    public GameObject xpPrefab;  // Prefab XP, který spadne po smrti
+    public GameObject xpPrefab;  
     public int xpAmount = 10; 
     public int score = 10;
-    
+    public Aura aura;
+    public bool isInAuraActive;
+    private Coroutine damageCoroutine;
+    private bool isCollisionActive = false; // Oprava pro player damage coroutine
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
-        playerDamage = (GameObject.FindGameObjectWithTag("Player")).GetComponent<Player>();
+        playerDamage = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (isInAuraActive && damageCoroutine == null)
+        {
+            damageCoroutine = StartCoroutine(TakeDamageOverTime());
+        }
     }
 
     public void TakeDamage(float damage)
@@ -40,8 +41,8 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         DropXP();
-        GameManager.instance.AddScore(10);
-        Destroy(this.gameObject);
+        GameManager.instance.AddScore(score);
+        Destroy(gameObject);
     }
 
     void DropXP()
@@ -50,21 +51,61 @@ public class Enemy : MonoBehaviour
         xpOrb.GetComponent<XPOrb>().SetXP(xpAmount);
     }
 
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Aura"))
+        {
+            aura = collider.GetComponent<Aura>();
+            isInAuraActive = true;
+
+            if (damageCoroutine == null)
+            {
+                damageCoroutine = StartCoroutine(TakeDamageOverTime());
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Aura"))
+        {
+            isInAuraActive = false;
+
+            if (damageCoroutine != null)
+            {
+                StopCoroutine(damageCoroutine);
+                damageCoroutine = null;
+            }
+        }
+    }
+
+    IEnumerator TakeDamageOverTime()
+    {
+        while (isInAuraActive)
+        {
+            TakeDamage(aura.damage);
+            yield return new WaitForSeconds(aura.damageInterval);
+        }
+        damageCoroutine = null;
+    }
+
+    // 🛠 Oprava kolize s hráčem (damage over time)
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            playerDamage.TakeDamage(damage);  
+            playerDamage.TakeDamage(damage);
             isCollisionActive = true;
             StartCoroutine(DealDamageOverTime());
         }
     }
 
-
     void OnCollisionExit2D(Collision2D collision)
     {
-        isCollisionActive = false;
-        StopCoroutine(DealDamageOverTime());
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isCollisionActive = false;
+        }
     }
 
     IEnumerator DealDamageOverTime()
@@ -75,6 +116,4 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(damageInterval);
         }
     }
-
-
 }
