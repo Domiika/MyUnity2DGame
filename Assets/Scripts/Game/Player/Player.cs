@@ -5,11 +5,11 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public HealthBar healthBar;
-    float maxHealth = 100;
-    float currentHealth;
+    public float maxHealth = 100;
+    public float currentHealth;
     public LevelBar levelBar;
-    float currentXP = 0f;
-    float maxXP = 100f;
+    public float currentXP = 0f;
+    public float maxXP = 20f;
     public int level = 1;
     public GameObject levelUpPanel;
     public GameObject deadPanel;
@@ -24,12 +24,8 @@ public class Player : MonoBehaviour
         Time.timeScale = 0;       
     }
 
-    // Update is called once per frame
     void Update()
-    {
-        
-
-        
+    {     
         if (Input.GetKeyDown(KeyCode.Space))
         {
             GainXP(50);
@@ -59,10 +55,11 @@ public class Player : MonoBehaviour
         } 
     }
 
-private IEnumerator Wait()
-{
-    yield return new WaitForSecondsRealtime(1f);
-}
+    private IEnumerator Wait()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+    }
+
     public void Die()
     {
         Time.timeScale = 0;
@@ -75,6 +72,8 @@ private IEnumerator Wait()
         level++;
         Time.timeScale = 0;
         levelUpPanel.SetActive(true);
+        maxXP*=1.2f;
+        levelBar.SetMaxValue(maxXP);
     }
 
     public void TakeDamage(float damage)

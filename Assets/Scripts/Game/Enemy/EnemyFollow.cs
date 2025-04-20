@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyFollow : MonoBehaviour
 {
-    public Transform player; // Reference na hráče (přiřaď v inspektoru nebo dynamicky)
-    public float moveSpeed = 2f; // Rychlost pohybu nepřítele
+    public Transform player; 
+    public float moveSpeed = 2f;
 
     private Rigidbody2D rb;
 
@@ -27,10 +27,8 @@ public class EnemyFollow : MonoBehaviour
     {      
         if (player != null)
         {
-            // Vypočítej směr k hráči
             Vector2 direction = (player.position - transform.position).normalized;
 
-            // Pohybuj nepřítelem směrem k hráči
             rb.velocity = direction * moveSpeed;
         }
     }

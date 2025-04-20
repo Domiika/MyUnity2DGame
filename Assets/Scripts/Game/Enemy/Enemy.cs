@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     public Aura aura;
     public bool isInAuraActive;
     private Coroutine damageCoroutine;
-    private bool isCollisionActive = false; // Oprava pro player damage coroutine
+    private bool isCollisionActive = false; 
 
     void Start()
     {
@@ -89,7 +89,6 @@ public class Enemy : MonoBehaviour
         damageCoroutine = null;
     }
 
-    // 🛠 Oprava kolize s hráčem (damage over time)
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))

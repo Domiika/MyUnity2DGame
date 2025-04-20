@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Rychlost pohybu hráče
+    public float moveSpeed = 5f; 
 
-    private Rigidbody2D rb; // Odkaz na Rigidbody2D komponentu
-    private Vector2 movement; // Vektor pohybu hráče
-    private SpriteRenderer spriteRenderer; // Odkaz na SpriteRenderer hráče
-    private Animator animator; // Odkaz na Animator komponentu
+    private Rigidbody2D rb; 
+    private Vector2 movement;
+    private SpriteRenderer spriteRenderer; 
+    private Animator animator; 
 
     void Start()
     {
-        // Automaticky získá potřebné komponenty
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();

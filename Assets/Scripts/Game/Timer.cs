@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro; //pouzita knihovna
+using TMPro; 
 
 public class Timer : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI timerText;
     public float elapsedTime;
 
-    // Update is called once per frame
 
     void Update()
     {

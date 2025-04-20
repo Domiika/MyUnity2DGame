@@ -11,7 +11,6 @@ public class SpellShotManager : MonoBehaviour
     public float speed;
     public float damage;
 
-   // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -22,7 +21,6 @@ public class SpellShotManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.position = player.position;

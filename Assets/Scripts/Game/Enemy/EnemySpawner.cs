@@ -6,29 +6,33 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyToSpawn;
 
+    public float interval;
     public float timeToSpawn;
     private float spawnCounter;
+    private float elapsedTime;
 
     public Transform minSpawn, maxSpawn;
 
-    // Start is called before the first frame update
     void Start()
     {
+        timeToSpawn = interval;
         spawnCounter = timeToSpawn;
     }
 
-    // Update is called once per frame
     void Update()
     {
         spawnCounter -= Time.deltaTime;
         if (spawnCounter <= 0f)
         {
             spawnCounter = timeToSpawn;
-
-            //Instantiate(enemyToSpawn, transform.position, transform.rotation);  
-
             Instantiate(enemyToSpawn, SelectSpawnPoint(), transform.rotation);
             
+        }
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime >= 10f)
+        {
+            timeToSpawn *= 0.90f;
+            elapsedTime = 0f;
         }
     }
 

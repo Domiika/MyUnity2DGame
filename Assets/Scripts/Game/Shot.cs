@@ -17,11 +17,10 @@ public class Shot : MonoBehaviour
     {
         if (target == null)
         {
-            FindNearestEnemy(); // Pokud cíl zmizí, znič střelu
+            FindNearestEnemy(); 
             return;
         }
 
-        // Pohyb k cíli
         Vector2 direction = (target.position - transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
@@ -55,7 +54,7 @@ public class Shot : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider)
     {
 
-        if (collider.CompareTag("Enemy")) //Zkontroluje jestli object má tag "Enemy"
+        if (collider.CompareTag("Enemy"))
         {
             Enemy enemy = target.GetComponent<Enemy>();
             enemy.TakeDamage(spellShotManager.damage);

@@ -7,6 +7,7 @@ public class Aura : MonoBehaviour, ISpell
     public float damage = 10f;
     public int spellLevel = 0;
     public float damageInterval = 1f;
+    public float auraScale;
 
     Transform player;
 

@@ -12,7 +12,6 @@ public class DeadPanel : MonoBehaviour
     
     public void OnPlayerDeath()
     {
-        // Získá čas od spuštění levelu
         float elapsedTime = Time.timeSinceLevelLoad;
 
         int minutes = Mathf.FloorToInt(elapsedTime / 60);

@@ -8,21 +8,33 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameObject pauseMenu;
     public int score = 0;
+    public GameObject debugPanel;
 
-    // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
-        }  
+        }
+        
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.G))
+        {
+            if (debugPanel.activeSelf)
+            {
+                debugPanel.SetActive(false);
+            }
+            else
+            {
+                debugPanel.SetActive(true);
+            }
+        }
+  
     }
 
     private void Awake()
@@ -30,11 +42,11 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // Zajistí, že GameManager zůstane mezi scénami
+            DontDestroyOnLoad(gameObject); 
         }
         else
         {
-            Destroy(gameObject); // Zničí duplicitní GameManager
+            Destroy(gameObject); 
         }
     }
 
