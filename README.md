@@ -96,6 +96,6 @@ No installation required – just click and play.
 ---
 
 ## Author
-Dominik Soják  
+Dominik Sojak  
 Graduation Project – 2025  
 Secondary Industrial School Brno, Purkyňova, Public Institution
