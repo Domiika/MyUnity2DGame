@@ -44,7 +44,7 @@ Funguje bez nutnosti instalace, stačí kliknout a hrát.
 ---
 
 ## Autor
-Dominik Soják  
+Dominik Sojak  
 Maturitní práce – 2025  
 Střední průmyslová škola Brno, Purkyňova, příspěvková organizace
 
